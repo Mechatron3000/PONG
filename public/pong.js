@@ -7,7 +7,7 @@ function setup() {
   createCanvas(innerWidth, innerHeight);
 	//socket = io.connect('http://78.62.26.153:12345');
 	//socket = io.connect('http://localhost:12345');
-	socket = io.connect('http://ftl.cleverapps.io');
+	socket = io.connect('http://infinipong.cleverapps.io');
 	socket.on('frame', drawFrame);
 	strokeWeight(5);
   ellipseMode(CENTER);
