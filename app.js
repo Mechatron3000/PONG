@@ -6,7 +6,6 @@ var socket = require('socket.io');
 var io = socket(server);
 io.sockets.on('connection', newConnection);
 
-
 function Client(id) {
 	this.id = id;
 	this.score = 0;
@@ -16,7 +15,7 @@ var points = 11;
 
 
 var Clients = [];
-var cooldown;
+//var cooldown;
 
 var width = 640;
 var centerX = width / 2;
