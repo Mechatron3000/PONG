@@ -113,7 +113,7 @@ function mainLoop() {
 				ballAngle = (2 * minAngle) - ballAngle + Math.PI;
 			}
 			//cooldown = 0;
-		}
+		//}
 		//cooldown--;
 		ballSpeed += 0.001;
 		if (ball.x - ball.r > width || ball.y - ball.r > width || ball.x < -ball.r || ball.y < -ball.r) {
