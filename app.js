@@ -95,14 +95,16 @@ function mainLoop() {
 		var minDist = ball.r + 1;
 		var minAngle = 0;
 		for (i = 0; i < Clients.length; i++) {
-			for (j = 0; j < points; j++) {
-				var x = centerX + (radius * Math.cos(Clients[i].angles[j]));
-				var y = centerY + (radius * Math.sin(Clients[i].angles[j]));
-				var dist = Math.sqrt(Math.pow(x - ball.x, 2) + Math.pow(y - ball.y, 2));
-				if (dist <= minDist && i != lastTouched) {
-					minDist = dist;
-					minAngle = Clients[i].angles[j];
-					lastTouched = i;
+			if (i != lastTouched) {
+				for (j = 0; j < points; j++) {
+					var x = centerX + (radius * Math.cos(Clients[i].angles[j]));
+					var y = centerY + (radius * Math.sin(Clients[i].angles[j]));
+					var dist = Math.sqrt(Math.pow(x - ball.x, 2) + Math.pow(y - ball.y, 2));
+					if (dist <= minDist) {
+						minDist = dist;
+						minAngle = Clients[i].angles[j];
+						lastTouched = i;
+					}
 				}
 			}
 		}
