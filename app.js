@@ -15,8 +15,6 @@ var points = 11;
 
 
 var Clients = [];
-//var cooldown;
-
 var width = 640;
 var centerX = width / 2;
 var centerY = width / 2;
@@ -92,29 +90,26 @@ function mainLoop() {
 		setupDone = true;
 	}
   if (Clients.length >= 1) {
-    ball.x += Math.cos(ballAngle) * ballSpeed;
-    ball.y += Math.sin(ballAngle) * ballSpeed;
-		//if (cooldown <= 0) {
-			var minDist = ball.r + 1;
-			var minAngle = 0;
-			for (i = 0; i < Clients.length; i++) {
-				for (j = 0; j < points; j++) {
-					var x = centerX + (radius * Math.cos(Clients[i].angles[j]));
-					var y = centerY + (radius * Math.sin(Clients[i].angles[j]));
-					var dist = Math.sqrt(Math.pow(x - ball.x, 2) + Math.pow(y - ball.y, 2));
-					if (dist <= minDist) {
-						minDist = dist;
-						minAngle = Clients[i].angles[j];
-						lastTouched = i;
-					}
+		ball.x += Math.cos(ballAngle) * ballSpeed;
+		ball.y += Math.sin(ballAngle) * ballSpeed;
+		var minDist = ball.r + 1;
+		var minAngle = 0;
+		for (i = 0; i < Clients.length; i++) {
+			for (j = 0; j < points; j++) {
+				var x = centerX + (radius * Math.cos(Clients[i].angles[j]));
+				var y = centerY + (radius * Math.sin(Clients[i].angles[j]));
+				var dist = Math.sqrt(Math.pow(x - ball.x, 2) + Math.pow(y - ball.y, 2));
+				if (dist <= minDist && i != lastTouched) {
+					minDist = dist;
+					minAngle = Clients[i].angles[j];
+					lastTouched = i;
 				}
 			}
-			if (minDist <= ball.r) {
-				ballAngle = (2 * minAngle) - ballAngle + Math.PI;
-			}
-			//cooldown = 0;
-		//}
-		//cooldown--;
+		}
+		if (minDist <= ball.r) {
+			ballAngle = (2 * minAngle) - ballAngle + Math.PI;
+			
+		}
 		ballSpeed += 0.001;
 		if (ball.x - ball.r > width || ball.y - ball.r > width || ball.x < -ball.r || ball.y < -ball.r) {
 			if (lastTouched >= 0 && lastTouched < Clients.length){
@@ -131,7 +126,6 @@ function reset() {
   ball.y = (width / 4) + Math.floor(Math.random() * (width / 2));
 	ballSpeed = 3;
 	lastTouched = -1;
-	cooldown = 5;
 }
 
 function recalculate() {
