@@ -35,7 +35,7 @@ function drawFrame(frameData) {
 			}
   	}
 		//stroke(255);
-		image(esa, (frameData.BL.x * (height / 640)) + ((width - height) / 2), (frameData.BL.y * height) / 640, (frameData.BL.r * 2 * height) / 640, (frameData.BL.r * 2 * height) / 640);
+		image(esa, (frameData.BL.x * (height / 640)) + ((width - height) / 2) - ((frameData.BL.r * 2 * height) / 1280), ((frameData.BL.y * height) / 640) - (frameData.BL.r * 2 * height) / 1280, (frameData.BL.r * 2 * height) / 640, (frameData.BL.r * 2 * height) / 640);
 	}
 	else {
 		
