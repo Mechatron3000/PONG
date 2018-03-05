@@ -8,6 +8,7 @@ function setup() {
 	//socket = io.connect('http://78.62.26.153:12345');
 	//socket = io.connect('http://localhost:12345');
 	socket = io.connect('http://infinipong.cleverapps.io');
+	esa = loadImage("assets/esa.png");
 	socket.on('frame', drawFrame);
 	strokeWeight(5);
   ellipseMode(CENTER);
@@ -34,6 +35,7 @@ function drawFrame(frameData) {
 			}
   	}
 		stroke(255);
+		texture(esa);
 		ellipse((frameData.BL.x * (height / 640)) + ((width - height) / 2), (frameData.BL.y * height) / 640, (frameData.BL.r * 2 * height) / 640, (frameData.BL.r * 2 * height) / 640);
 	}
 	else {
