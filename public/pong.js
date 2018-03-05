@@ -34,9 +34,8 @@ function drawFrame(frameData) {
 				line((width / 2) + ((radius * cos(frameData.CL[i].angles[j]) * height) / 640), (height / 2) + ((radius * sin(frameData.CL[i].angles[j]) * height) / 640), (width / 2) + ((radius * cos(frameData.CL[i].angles[j + 1]) * height) / 640), (height / 2) + ((radius * sin(frameData.CL[i].angles[j + 1]) * height) / 640));
 			}
   	}
-		stroke(255);
-		texture(esa);
-		ellipse((frameData.BL.x * (height / 640)) + ((width - height) / 2), (frameData.BL.y * height) / 640, (frameData.BL.r * 2 * height) / 640, (frameData.BL.r * 2 * height) / 640);
+		//stroke(255);
+		image(esa, (frameData.BL.x * (height / 640)) + ((width - height) / 2), (frameData.BL.y * height) / 640, (frameData.BL.r * 2 * height) / 640, (frameData.BL.r * 2 * height) / 640);
 	}
 	else {
 		
