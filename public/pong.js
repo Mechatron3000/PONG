@@ -46,6 +46,9 @@ function drawFrame(frameData) {
 			line(((width-height)/2)-20, (height/4)+10, 20, height/2);
 			line(20, height/2, ((width-height)/2)-20, (3*height/4)-10);
 			
+			line(((width-height)/2)+height+20, (height/4)+10, width-20, height/2);
+			line(width-20, height/2, ((width-height)/2)+height+20, (3*height/4)-10);
+			
 			image(esa, (frameData.BL.x * (height / 640)) + ((width - height) / 2) - ((frameData.BL.r * 2 * height) / 1280), ((frameData.BL.y * height) / 640) - (frameData.BL.r * 2 * height) / 1280, (frameData.BL.r * 2 * height) / 640, (frameData.BL.r * 2 * height) / 640);
 		}
 	}
