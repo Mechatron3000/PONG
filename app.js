@@ -110,7 +110,7 @@ function mainLoop() {
 					if (dist <= minDist) {
 						minDist = dist;
 						minAngle = Clients[i].angles[j];
-						lastTouched = i;
+						//lastTouched = i;
 					}
 				}
 			}
@@ -120,9 +120,9 @@ function mainLoop() {
 		}
 		ballSpeed += 0.001;
 		if (ball.x - ball.r > width || ball.y - ball.r > width || ball.x < -ball.r || ball.y < -ball.r) {
-			if (lastTouched >= 0 && lastTouched < playerCount){
-				Clients[lastTouched].score++;
-			}
+//			if (lastTouched >= 0 && lastTouched < playerCount){
+//				Clients[lastTouched].score++;
+//			}
 			reset();
 		}
   }
@@ -130,10 +130,10 @@ function mainLoop() {
 
 function reset() {
   ballAngle = Math.random() * Math.PI * 2;
-  ball.x = (width / 4) + Math.floor(Math.random() * (width / 2));
-  ball.y = (width / 4) + Math.floor(Math.random() * (width / 2));
+  ball.x = (width / 2); //+ Math.floor(Math.random() * (width / 2));
+  ball.y = (width / 2); //+ Math.floor(Math.random() * (width / 2));
 	ballSpeed = 3;
-	lastTouched = -1;
+	//lastTouched = -1;
 }
 
 function recalculate() {
