@@ -9,11 +9,12 @@ io.sockets.on('connection', newConnection);
 function Client(id) {
 	this.id = id;
 	this.score = 0;
-	this.angles = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	this.angles = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	this.status = 'player'
 }
 var points = 11;
 
-
+var ClientCount = 0;
 var Clients = [];
 var width = 640;
 var centerX = width / 2;
@@ -42,7 +43,7 @@ setInterval(mainLoop, serverTickrate);
 function newConnection(socket) {
 	var client = new Client(socket.id);
 	Clients.push(client);
-	
+	ClientCount += 1;
 	socket.on('disconnect', removeClient);
 	function removeClient(){
 		for (i = 0; i < Clients.length; i++) {
@@ -50,6 +51,7 @@ function newConnection(socket) {
 				Clients.splice(i, 1);
 			}
 		}
+		ClientCount -= 1;
 		recalculate();
 	}
 	socket.on('key', gotData);
@@ -62,15 +64,18 @@ function newConnection(socket) {
 		for (i = 0; i < Clients.length; i++) {
 			if (Clients[i].id == socket.id) {
 				frameData.ID = i;
-				if (data.c == 'w' && (Clients.length == 1 || Clients[i].angles[points - 1] < ((2 * Math.PI * i) / Clients.length) + (Math.PI / Clients.length))) {
+				if (data.c == 'w' && (ClientCount == 1 || Clients[i].angles[points - 1] < ((2 * Math.PI * i) / ClientCount) + (Math.PI / ClientCount))) {
 					for (j = 0; j < points; j++) {
 						Clients[i].angles[j] += angleSpeed;
 					}
 				}
-				if (data.c == 's' && (Clients.length == 1 || Clients[i].angles[0] > ((2 * Math.PI * i) / Clients.length) - (Math.PI / Clients.length))) {
+				if (data.c == 's' && (ClientCount == 1 || Clients[i].angles[0] > ((2 * Math.PI * i) / Clients.length) - (Math.PI / Clients.length))) {
 					for (j = 0; j < points; j++) {
 						Clients[i].angles[j] -= angleSpeed;
 					}
+				}
+				if (data.c == 'spectator' && ClientCount == 1) {
+					Clients[i].status = 'spectator';
 				}
 			}
 		}
@@ -110,11 +115,10 @@ function mainLoop() {
 		}
 		if (minDist <= ball.r) {
 			ballAngle = (2 * minAngle) - ballAngle + Math.PI;
-			
 		}
 		ballSpeed += 0.001;
 		if (ball.x - ball.r > width || ball.y - ball.r > width || ball.x < -ball.r || ball.y < -ball.r) {
-			if (lastTouched >= 0 && lastTouched < Clients.length){
+			if (lastTouched >= 0 && lastTouched < ClientCount){
 				Clients[lastTouched].score++;
 			}
 			reset();
@@ -131,10 +135,11 @@ function reset() {
 }
 
 function recalculate() {
-	ball.r = width / (4 * Clients.length);
+	ball.r = width / (4 * ClientCount);
 	for (i = 0; i < Clients.length; i++) {
 		for (j = -((points - 1) / 2); j <= ((points - 1) / 2); j++) {
-			Clients[i].angles[j + ((points - 1) / 2)] = ((2 * Math.PI * i) / Clients.length) + ((Math.PI * j) / (Clients.length * 2 * points));
+			Clients[i].angles[j + ((points - 1) / 2)] = ((2 * Math.PI * i) / ClientCount) + ((Math.PI * j) / (ClientCount * 2 * points));
 		}
 	}
+	reset();
 }
