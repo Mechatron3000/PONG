@@ -24,21 +24,20 @@ function drawFrame(frameData) {
 	background(0);
 	if (frameData.CL.length >= 1) {
 		for (i = 0; i < frameData.CL.length; i++) {
-			noStroke();
-			text(frameData.CL[i].score, (width / 2) + (((radius + 16) * cos(frameData.CL[i].angles[5]) * height) / 640), (height / 2) + (((radius + 16) * sin(frameData.CL[i].angles[5]) * height) / 640));
-			stroke(255);
-			if (frameData.ID == i) {
-				stroke(255,0,0);
+			if (frameData.CL[i].status == 'player') {
+				noStroke();
+				text(frameData.CL[i].score, (width / 2) + (((radius + 16) * cos(frameData.CL[i].angles[5]) * height) / 640), (height / 2) + (((radius + 16) * sin(frameData.CL[i].angles[5]) * height) / 640));
+				stroke(255);
+				if (frameData.ID == i) {
+					stroke(255,0,0);
+				}
+				for (j = 0; j < 11; j++) {
+					line((width / 2) + ((radius * cos(frameData.CL[i].angles[j]) * height) / 640), (height / 2) + ((radius * sin(frameData.CL[i].angles[j]) * height) / 640), (width / 2) + ((radius * cos(frameData.CL[i].angles[j + 1]) * height) / 640), (height / 2) + ((radius * sin(frameData.CL[i].angles[j + 1]) * height) / 640));
+				}
 			}
-			for (j = 0; j < 11; j++) {
-				line((width / 2) + ((radius * cos(frameData.CL[i].angles[j]) * height) / 640), (height / 2) + ((radius * sin(frameData.CL[i].angles[j]) * height) / 640), (width / 2) + ((radius * cos(frameData.CL[i].angles[j + 1]) * height) / 640), (height / 2) + ((radius * sin(frameData.CL[i].angles[j + 1]) * height) / 640));
-			}
-  	}
-		//stroke(255);
-		image(esa, (frameData.BL.x * (height / 640)) + ((width - height) / 2) - ((frameData.BL.r * 2 * height) / 1280), ((frameData.BL.y * height) / 640) - (frameData.BL.r * 2 * height) / 1280, (frameData.BL.r * 2 * height) / 640, (frameData.BL.r * 2 * height) / 640);
-	}
-	else {
-		
+			//stroke(255);
+			image(esa, (frameData.BL.x * (height / 640)) + ((width - height) / 2) - ((frameData.BL.r * 2 * height) / 1280), ((frameData.BL.y * height) / 640) - (frameData.BL.r * 2 * height) / 1280, (frameData.BL.r * 2 * height) / 640, (frameData.BL.r * 2 * height) / 640);
+		}
 	}
 }
 
@@ -46,9 +45,12 @@ function draw() {
 	var data = {
 		c: key
 	}
-	if (keyIsPressed == true){
+	if (keyIsPressed == true) {
 		data.c = key;
   }
+	else if (mouseIsPressed == true && mouseX > 10 && mouseX < 60 && mouseY > 10 && mouseY < 60) {
+		data.c = 'spectator';
+	}
 	else {
 		data.c = '0';
 	}
