@@ -43,7 +43,7 @@ setInterval(mainLoop, serverTickrate);
 function newConnection(socket) {
 	var client = new Client(socket.id);
 	Clients.push(client);
-	ClientCount += 1;
+	playerCount += 1;
 	socket.on('disconnect', removeClient);
 	function removeClient(){
 		for (i = 0; i < Clients.length; i++) {

@@ -22,6 +22,7 @@ function setup() {
 function drawFrame(frameData) {
 	clear();
 	background(0);
+	rect
 	if (frameData.CL.length >= 1) {
 		for (i = 0; i < frameData.CL.length; i++) {
 			if (frameData.CL[i].status == 'player') {
@@ -51,8 +52,11 @@ function draw() {
 	else if (mouseIsPressed == true && mouseX > 10 && mouseX < 60 && mouseY > 10 && mouseY < 60) {
 		data.c = 'spectator';
 	}
-	else if (mouseX > 10 && mouseX < 60 && mouseY > 10 && mouseY < 60) {
-		
+	else if (mouseIsPressed == true && mouseX > 10 && mouseX < ((width-height)/2)-10 && mouseY > height/4 && mouseY < 3*height/4) {
+		data.c = 'w';
+	}
+	else if (mouseIsPressed == true && mouseX < width-10 && mouseX > ((width-height)/2)+height+10 && mouseY > height/4 && mouseY < 3*height/4) {
+		data.c = 's';
 	}
 	else {
 		data.c = '0';
