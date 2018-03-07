@@ -132,8 +132,8 @@ function mainLoop() {
 
 function reset() {
   ballAngle = Math.random() * Math.PI * 2;
-  ball.x = (width / 4) + Math.floor(Math.random() * (width / 2));
-  ball.y = (width / 4) + Math.floor(Math.random() * (width / 2));
+  ball.x = (((width-height) + height/4) / 2) + Math.floor(Math.random() * (height / 2));
+  ball.y = (height / 4) + Math.floor(Math.random() * (height / 2));
 	ballSpeed = 3;
 	//lastTouched = -1;
 }
