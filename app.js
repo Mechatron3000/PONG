@@ -20,7 +20,7 @@ var width = 640;
 var centerX = width / 2;
 var centerY = width / 2;
 var radius = 300;
-var lastCl = 0;
+var lastPl = 0;
 
 var ball = {
 	r: 0,
@@ -86,9 +86,9 @@ function newConnection(socket) {
 }
 
 function mainLoop() {
-	if (lastCl != Clients.length) {
-		console.log(Clients.length);
-		lastCl = Clients.length;
+	if (lastPl != playerCount) {
+		console.log(playerCount);
+		lastPl = playerCount;
 	}
 	if (setupDone == false) {
 		recalculate();
@@ -101,7 +101,7 @@ function mainLoop() {
 		var minDist = ball.r + 1;
 		var minAngle = 0;
 		for (i = 0; i < Clients.length; i++) {
-			if (i != lastTouched && Clients[i].status == 'spectator') {
+			if (i != lastTouched && Clients[i].status == 'player') {
 				for (j = 0; j < points; j++) {
 					var x = centerX + (radius * Math.cos(Clients[i].angles[j]));
 					var y = centerY + (radius * Math.sin(Clients[i].angles[j]));
