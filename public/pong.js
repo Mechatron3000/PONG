@@ -52,7 +52,7 @@ function drawFrame(frameData) {
 			else {
 				noStroke();
 				fill(255);
-				text(width/2, height-10, 'Join the game at: www.infinipong.cleverapps.io');
+				text('Join the game at: www.infinipong.cleverapps.io', width/2, height-10);
 			}
 			image(esa, (frameData.BL.x * (height / 640)) + ((width - height) / 2) - ((frameData.BL.r * 2 * height) / 1280), ((frameData.BL.y * height) / 640) - (frameData.BL.r * 2 * height) / 1280, (frameData.BL.r * 2 * height) / 640, (frameData.BL.r * 2 * height) / 640);
 		}
