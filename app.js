@@ -14,7 +14,7 @@ function Client(id) {
 }
 var points = 11;
 
-var ClientCount = 0;
+var playerCount = 0;
 var Clients = [];
 var width = 640;
 var centerX = width / 2;
@@ -51,7 +51,7 @@ function newConnection(socket) {
 				Clients.splice(i, 1);
 			}
 		}
-		ClientCount -= 1;
+		playerCount -= 1;
 		recalculate();
 	}
 	socket.on('key', gotData);
@@ -64,18 +64,19 @@ function newConnection(socket) {
 		for (i = 0; i < Clients.length; i++) {
 			if (Clients[i].id == socket.id) {
 				frameData.ID = i;
-				if (data.c == 'w' && (ClientCount == 1 || Clients[i].angles[points - 1] < ((2 * Math.PI * i) / ClientCount) + (Math.PI / ClientCount))) {
+				if (data.c == 'w' && (playerCount == 1 || Clients[i].angles[points - 1] < ((2 * Math.PI * i) / playerCount) + (Math.PI / playerCount))) {
 					for (j = 0; j < points; j++) {
 						Clients[i].angles[j] += angleSpeed;
 					}
 				}
-				if (data.c == 's' && (ClientCount == 1 || Clients[i].angles[0] > ((2 * Math.PI * i) / Clients.length) - (Math.PI / Clients.length))) {
+				if (data.c == 's' && (playerCount == 1 || Clients[i].angles[0] > ((2 * Math.PI * i) / playerCount) - (Math.PI / playerCount))) {
 					for (j = 0; j < points; j++) {
 						Clients[i].angles[j] -= angleSpeed;
 					}
 				}
 				if (data.c == 'spectator' && ClientCount == 1) {
 					Clients[i].status = 'spectator';
+					playerCount -= 1;
 				}
 			}
 		}
@@ -118,7 +119,7 @@ function mainLoop() {
 		}
 		ballSpeed += 0.001;
 		if (ball.x - ball.r > width || ball.y - ball.r > width || ball.x < -ball.r || ball.y < -ball.r) {
-			if (lastTouched >= 0 && lastTouched < ClientCount){
+			if (lastTouched >= 0 && lastTouched < playerCount){
 				Clients[lastTouched].score++;
 			}
 			reset();
@@ -135,10 +136,10 @@ function reset() {
 }
 
 function recalculate() {
-	ball.r = width / (4 * ClientCount);
+	ball.r = width / (4 * playerCount);
 	for (i = 0; i < Clients.length; i++) {
 		for (j = -((points - 1) / 2); j <= ((points - 1) / 2); j++) {
-			Clients[i].angles[j + ((points - 1) / 2)] = ((2 * Math.PI * i) / ClientCount) + ((Math.PI * j) / (ClientCount * 2 * points));
+			Clients[i].angles[j + ((points - 1) / 2)] = ((2 * Math.PI * i) / playerCount) + ((Math.PI * j) / (playerCount * 2 * points));
 		}
 	}
 	reset();

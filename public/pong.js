@@ -51,6 +51,9 @@ function draw() {
 	else if (mouseIsPressed == true && mouseX > 10 && mouseX < 60 && mouseY > 10 && mouseY < 60) {
 		data.c = 'spectator';
 	}
+	else if (mouseX > 10 && mouseX < 60 && mouseY > 10 && mouseY < 60) {
+		
+	}
 	else {
 		data.c = '0';
 	}
