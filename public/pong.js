@@ -13,6 +13,7 @@ function setup() {
 	strokeWeight(5);
   ellipseMode(CENTER);
 	angleMode(RADIANS);
+	rectMode(CORNERS);
   fill(255);
 	textsize = height / 32;
 	textSize(textsize);
@@ -37,7 +38,9 @@ function drawFrame(frameData) {
 				}
 			}
 			stroke(255);
-			rect(10, 10, 50, 50);
+			rect(10, 10, 60, 60);
+			rect(((width-height)/2)+height+10, height/4, width-10, 3*height/4);
+			rect(10, height/4, ((width-height)/2)-10 ,3*height/4);
 			image(esa, (frameData.BL.x * (height / 640)) + ((width - height) / 2) - ((frameData.BL.r * 2 * height) / 1280), ((frameData.BL.y * height) / 640) - (frameData.BL.r * 2 * height) / 1280, (frameData.BL.r * 2 * height) / 640, (frameData.BL.r * 2 * height) / 640);
 		}
 	}
