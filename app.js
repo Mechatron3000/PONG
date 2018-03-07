@@ -74,7 +74,7 @@ function newConnection(socket) {
 						Clients[i].angles[j] -= angleSpeed;
 					}
 				}
-				if (data.c == 'spectator' && ClientCount == 1) {
+				if (data.c == 'spectator') {
 					Clients[i].status = 'spectator';
 					playerCount -= 1;
 				}
