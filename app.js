@@ -112,7 +112,7 @@ function mainLoop() {
 					if (dist <= minDist) {
 						minDist = dist;
 						minAngle = Clients[i].angles[j];
-						//lastTouched = i;
+						lastTouched = i;
 					}
 				}
 			}
@@ -132,10 +132,10 @@ function mainLoop() {
 
 function reset() {
   ballAngle = Math.random() * Math.PI * 2;
-  ball.x = (((width-height) + height/4) / 2) + Math.floor(Math.random() * (height / 2));
-  ball.y = (height / 4) + Math.floor(Math.random() * (height / 2));
+  ball.x = (width / 2); //+ Math.floor(Math.random() * (height / 2));
+  ball.y = (height / 2); //+ Math.floor(Math.random() * (height / 2));
 	ballSpeed = 3;
-	//lastTouched = -1;
+	lastTouched = -1;
 }
 
 function recalculate() {
