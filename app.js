@@ -138,8 +138,10 @@ function reset() {
 
 function recalculate() {
 	for (i = 0; i < Clients.length; i++) {
-		for (j = -((points - 1) / 2); j <= ((points - 1) / 2); j++) {
-			Clients[i].angles[j + ((points - 1) / 2)] = ((2 * Math.PI * i) / playerCount) + ((Math.PI * j) / (playerCount * 2 * points));
+		if (Clients[i].status == 'player') {
+			for (j = -((points - 1) / 2); j <= ((points - 1) / 2); j++) {
+				Clients[i].angles[j + ((points - 1) / 2)] = ((2 * Math.PI * i) / playerCount) + ((Math.PI * j) / (playerCount * 2 * points));
+			}
 		}
 	}
 	reset();
