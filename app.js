@@ -23,7 +23,7 @@ var radius = 300;
 var lastPl = 0;
 
 var ball = {
-	r: 0,
+	r: 200,
 	x: 0.5,
 	y: 0.5,
 }
@@ -77,6 +77,7 @@ function newConnection(socket) {
 				if (data.c == 'spectator' && Clients[i].status == 'player') {
 					Clients[i].status = 'spectator';
 					playerCount -= 1;
+					recalculate();
 				}
 			}
 		}
@@ -136,7 +137,6 @@ function reset() {
 }
 
 function recalculate() {
-	ball.r = width / (4 * playerCount);
 	for (i = 0; i < Clients.length; i++) {
 		for (j = -((points - 1) / 2); j <= ((points - 1) / 2); j++) {
 			Clients[i].angles[j + ((points - 1) / 2)] = ((2 * Math.PI * i) / playerCount) + ((Math.PI * j) / (playerCount * 2 * points));
