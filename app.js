@@ -23,7 +23,7 @@ var radius = 300;
 var lastPl = 0;
 
 var ball = {
-	r: 200,
+	r: 50,
 	x: 0.5,
 	y: 0.5,
 }
