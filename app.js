@@ -28,7 +28,7 @@ var ball = {
 	y: 0.5,
 }
 
-var lastTouched;
+var lastTouched = -1;
 var ballAngle;
 var ballSpeed;
 var shortAngle;
