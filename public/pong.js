@@ -2,6 +2,7 @@ var socket;
 
 var textsize;
 var radius = 300;
+var touched = false;
 
 function setup() {
   createCanvas(innerWidth, innerHeight);
@@ -61,17 +62,25 @@ function draw() {
 	if (keyIsPressed == true) {
 		data.c = key;
   }
-	else if (mouseIsPressed == true && mouseX > 10 && mouseX < 60 && mouseY > 10 && mouseY < 60) {
+	else if ((mouseIsPressed == true || touched == true) && mouseX > 10 && mouseX < 60 && mouseY > 10 && mouseY < 60) {
 		data.c = 'spectator';
 	}
-	else if (mouseIsPressed == true && mouseX > 10 && mouseX < ((width-height)/2)-10 && mouseY > height/4 && mouseY < 3*height/4) {
+	else if ((mouseIsPressed == true || touched == true) && mouseX > 10 && mouseX < ((width-height)/2)-10 && mouseY > height/4 && mouseY < 3*height/4) {
 		data.c = 'w';
 	}
-	else if (mouseIsPressed == true && mouseX < width-10 && mouseX > ((width-height)/2)+height+10 && mouseY > height/4 && mouseY < 3*height/4) {
+	else if ((mouseIsPressed == true || touched == true) && mouseX < width-10 && mouseX > ((width-height)/2)+height+10 && mouseY > height/4 && mouseY < 3*height/4) {
 		data.c = 's';
 	}
 	else {
 		data.c = '0';
 	}
 	socket.emit('key', data);
+}
+
+function touchStarted() {
+	touched = true;
+}
+
+function touchEnded() {
+	touched = false;
 }
