@@ -47,11 +47,13 @@ function newConnection(socket) {
 	socket.on('disconnect', removeClient);
 	function removeClient(){
 		for (i = 0; i < Clients.length; i++) {
+			if (Clients[i].status == 'player') {
+				playerCount -= 1;
+			}
 			if (Clients[i].id == socket.id) {
 				Clients.splice(i, 1);
 			}
 		}
-		playerCount -= 1;
 		recalculate();
 	}
 	socket.on('key', gotData);
