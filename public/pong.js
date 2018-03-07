@@ -26,8 +26,8 @@ function drawFrame(frameData) {
 	if (frameData.CL.length >= 1) {
 		for (i = 0; i < frameData.CL.length; i++) {
 			if (frameData.CL[i].status == 'player') {
-				noStroke();
-				text(frameData.CL[i].score, (width / 2) + (((radius + 16) * cos(frameData.CL[i].angles[5]) * height) / 640), (height / 2) + (((radius + 16) * sin(frameData.CL[i].angles[5]) * height) / 640));
+				//noStroke();
+				//text(frameData.CL[i].score, (width / 2) + (((radius + 16) * cos(frameData.CL[i].angles[5]) * height) / 640), (height / 2) + (((radius + 16) * sin(frameData.CL[i].angles[5]) * height) / 640));
 				stroke(255);
 				if (frameData.ID == i) {
 					stroke(255,0,0);
