@@ -37,10 +37,16 @@ function drawFrame(frameData) {
 					line((width / 2) + ((radius * cos(frameData.CL[i].angles[j]) * height) / 640), (height / 2) + ((radius * sin(frameData.CL[i].angles[j]) * height) / 640), (width / 2) + ((radius * cos(frameData.CL[i].angles[j + 1]) * height) / 640), (height / 2) + ((radius * sin(frameData.CL[i].angles[j + 1]) * height) / 640));
 				}
 			}
+			stroke(127);
+			rect(10, 10, 60, 60, 10);
+			
+			rect(((width-height)/2)+height+10, height/4, width-10, 3*height/4, 10);
+			rect(10, height/4, ((width-height)/2)-10, 3*height/4, 10);
+			
 			stroke(255);
-			rect(10, 10, 60, 60);
-			rect(((width-height)/2)+height+10, height/4, width-10, 3*height/4);
-			rect(10, height/4, ((width-height)/2)-10 ,3*height/4);
+			line(((width-height)/2)-20, (height/4)-10, 20, height/2);
+			line(20, height/2, ((width-height)/2)-20, (3*height/4)-10);
+			
 			image(esa, (frameData.BL.x * (height / 640)) + ((width - height) / 2) - ((frameData.BL.r * 2 * height) / 1280), ((frameData.BL.y * height) / 640) - (frameData.BL.r * 2 * height) / 1280, (frameData.BL.r * 2 * height) / 640, (frameData.BL.r * 2 * height) / 640);
 		}
 	}
