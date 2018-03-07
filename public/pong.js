@@ -49,6 +49,11 @@ function drawFrame(frameData) {
 				line(((width-height)/2)+height+20, (height/4)+10, width-20, height/2);
 				line(width-20, height/2, ((width-height)/2)+height+20, (3*height/4)-10);
 			}
+			else {
+				noStroke();
+				fill(255);
+				text(width/2, height-10, 'Join the game at: www.infinipong.cleverapps.io');
+			}
 			image(esa, (frameData.BL.x * (height / 640)) + ((width - height) / 2) - ((frameData.BL.r * 2 * height) / 1280), ((frameData.BL.y * height) / 640) - (frameData.BL.r * 2 * height) / 1280, (frameData.BL.r * 2 * height) / 640, (frameData.BL.r * 2 * height) / 640);
 		}
 	}
