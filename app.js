@@ -47,10 +47,10 @@ function newConnection(socket) {
 	socket.on('disconnect', removeClient);
 	function removeClient(){
 		for (i = 0; i < Clients.length; i++) {
-			if (Clients[i].status == 'player') {
-				playerCount -= 1;
-			}
 			if (Clients[i].id == socket.id) {
+				if (Clients[i].status == 'player') {
+					playerCount -= 1;
+				}
 				Clients.splice(i, 1);
 			}
 		}
