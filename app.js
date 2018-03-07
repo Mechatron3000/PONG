@@ -101,7 +101,7 @@ function mainLoop() {
 		var minDist = ball.r + 1;
 		var minAngle = 0;
 		for (i = 0; i < Clients.length; i++) {
-			if (i != lastTouched) {
+			if (i != lastTouched && Clients[i].status == 'spectator') {
 				for (j = 0; j < points; j++) {
 					var x = centerX + (radius * Math.cos(Clients[i].angles[j]));
 					var y = centerY + (radius * Math.sin(Clients[i].angles[j]));
